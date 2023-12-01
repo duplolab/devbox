@@ -1,0 +1,5 @@
+---
+- name: Install archive package
+  include_tasks:
+    file: tasks-install-archive.yml
+  with_items: "{{ unarchive_packages }}"

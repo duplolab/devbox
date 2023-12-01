@@ -1,0 +1,6 @@
+---
+hp_printer_pkgs:
+  - hplip
+  - hplip-gui
+
+pkg_install_retries: 3

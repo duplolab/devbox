@@ -1,0 +1,48 @@
+---
+homebrew_repo: https://github.com/Homebrew/brew.git
+
+homebrew_prefix: "/home/linuxbrew/.linuxbrew"
+homebrew_install_path: "{{ homebrew_prefix }}/Homebrew"
+homebrew_brew_bin_path: "{{ homebrew_prefix }}/bin"
+
+homebrew_installed_packages: []
+
+homebrew_uninstalled_packages: []
+
+homebrew_upgrade_all_packages: false
+
+homebrew_taps:
+  - homebrew/core
+
+homebrew_cask_apps: []
+
+homebrew_cask_uninstalled_apps: []
+
+homebrew_cask_appdir: "{{ homebrew_prefix }}/apps"
+homebrew_cask_accept_external_apps: false
+
+# Set this to your account password if casks need elevated privileges.
+# ansible_become_password: ''
+
+homebrew_use_brewfile: true
+homebrew_brewfile_dir: "~"
+
+homebrew_clear_cache: false
+
+homebrew_folders_additional: []
+
+homebrew_folders_base:
+  - Cellar
+  - Homebrew
+  - Frameworks
+  - Caskroom
+  - bin
+  - etc
+  - include
+  - lib
+  - opt
+  - sbin
+  - share
+  - share/zsh
+  - share/zsh/site-functions
+  - var

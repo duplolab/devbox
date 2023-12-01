@@ -1,0 +1,22 @@
+---
+# tasks for persisting Homebrew environment variables in shell configs
+
+- name: "Set {{ homebrew_profile }} path"
+  set_fact:
+    homebrew_profile_path: "{{ ansible_env.HOME }}/{{ homebrew_profile }}"
+
+- name: "Get stats of the {{ homebrew_profile_path }} path"
+  stat:
+    path: "{{ homebrew_profile_path }}"
+  register: homebrew_profile_result
+
+- name: Ensure Homebrew environment variables in shell configs
+  blockinfile:
+    path: "{{ homebrew_profile_path }}"
+    block: |
+      [[ -f "{{ homebrew_brew_bin_path }}/brew" ]] && eval $("{{ homebrew_brew_bin_path }}/brew" shellenv)
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - Homebrew"
+    insertbefore: BOF
+    create: false
+  changed_when: false
+  when: homebrew_profile_result.stat.exists

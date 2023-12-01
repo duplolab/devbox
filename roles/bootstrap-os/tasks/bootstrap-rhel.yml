@@ -1,0 +1,7 @@
+- name: RHEL | setup-common | Ensure packages was installed
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ rhel_packages | default([]) }}"
+  retries: 3

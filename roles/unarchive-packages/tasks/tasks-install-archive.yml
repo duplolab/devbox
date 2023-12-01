@@ -1,0 +1,50 @@
+- name: Check for installation
+  ansible.builtin.stat:
+    path: "{{ item.package_binary_dir }}"
+  changed_when: false
+  register: package_binary
+
+- name: "Download {{ item.package_archive }}"
+  when: not package_binary.stat.exists
+  block:
+    - name: "Run downloading {{ item.package_url }}..."
+      ansible.builtin.get_url:
+        url: "{{ item.package_url }}"
+        dest: "/tmp/{{ item.package_archive }}"
+        checksum: "{{ item.package_checksum }}"
+        mode: 0644
+
+    - name: "Run mkdir {{ item.package_binary_dir }}"
+      ansible.builtin.file:
+        path: "{{ item.package_binary_dir }}"
+        state: directory
+        mode: 0755
+
+    - name: "Run unarchive /tmp/{{ item.package_archive }} to {{ item.package_binary_dir }}"
+      ansible.builtin.unarchive:
+        remote_src: true
+        src: "/tmp/{{ item.package_archive }}"
+        dest: "{{ item.package_binary_dir }}"
+        exclude: "{{ item.exclude }}"
+
+  always:
+    - name: "Run rm /tmp/{{ item.package_archive }}"
+      file:
+        path: "/tmp/{{ item.package_archive }}"
+        state: absent
+
+- name: "Run mkdir {{ item.link_dir }}"
+  file:
+    path: "{{ item.link_dir }}"
+    state: directory
+    mode: 0755
+
+- name: "Run link {{ package_installed_exe }} to {{ link_dir }}"
+  file:
+    src: "{{ item.package_binary_dir }}/{{ bin.src | default(bin) }}"
+    dest: "{{ item.link_dir }}/{{ bin.dest | default(bin) }}"
+    state: link
+    force: "{{ item.force_install }}"
+  with_items: "{{ item.package_bins }}"
+  loop_control:
+    loop_var: bin

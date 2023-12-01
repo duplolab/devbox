@@ -1,0 +1,27 @@
+---
+- name: Install Tilix and Python3-psutil Packages
+  become: true
+  package:
+    name:
+      - tilix
+      - python3-psutil
+    state: present
+
+- name: Configure Tilix Options
+  dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop: "{{ tilix_options }}"
+
+- name: Retrieve Default Profile UUID for Tilix
+  shell: gsettings get com.gexperts.Tilix.ProfilesList default | awk '{ print substr( $0, 2, length($0)-2 ) }'
+  register: tilix_uuid_profile
+  changed_when: false
+
+- name: Configure Tilix Default Profile Properties
+  dconf:
+    key: "/com/gexperts/Tilix/profiles/{{ tilix_uuid_profile.stdout }}/{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop: "{{ tilix_default_profile_properties }}"

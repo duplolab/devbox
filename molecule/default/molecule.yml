@@ -1,0 +1,23 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - cgroupns_mode: host
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    dockerfile: fedora39.Dockerfile
+    image: geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest
+    name: devbox-gui
+    pre_build_image: false
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+provisioner:
+  inventory:
+    links:
+      hosts: inventory.ini
+  name: ansible
+  playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+role_name_check: 1

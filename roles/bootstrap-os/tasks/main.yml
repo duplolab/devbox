@@ -1,0 +1,30 @@
+---
+- name: Fetch /etc/os-release
+  raw: cat /etc/os-release
+  register: os_release
+  changed_when: false
+  # This command should always run, even in check mode
+  check_mode: false
+
+- include_tasks: bootstrap-debian.yml
+  when: "'ID=debian' in os_release.stdout_lines or 'ID=ubuntu' in os_release.stdout_lines"
+
+# Fedora "classic"
+- include_tasks: bootstrap-fedora.yml
+  when:
+    - "'ID=fedora' in os_release.stdout_lines"
+    - "'VARIANT_ID=coreos' not in os_release.stdout_lines"
+
+# Fedora "classic"
+- include_tasks: bootstrap-fedora.yml
+  when:
+    - "'ID_LIKE=fedora' in os_release.stdout_lines"
+
+- include_tasks: bootstrap-rhel.yml
+  when: '''ID="rhel"'' in os_release.stdout_lines'
+
+- name: Create remote_tmp for it is used by another module
+  file:
+    path: "{{ ansible_remote_tmp | default('~/.ansible/tmp') }}"
+    state: directory
+    mode: 0700

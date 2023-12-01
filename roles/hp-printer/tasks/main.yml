@@ -1,0 +1,6 @@
+---
+- name: Ensure HP printer packages are installed
+  become: true
+  ansible.builtin.package:
+    name: "{{ hp_printer_pkgs | default([]) }}"
+    state: present

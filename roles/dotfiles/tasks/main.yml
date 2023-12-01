@@ -1,0 +1,45 @@
+---
+- name: Ensure requirements is installed
+  become: true
+  package:
+    name:
+      - git
+      - rcm
+    state: present
+
+- name: rcm | Ensure dotfiles repository is cloned locally
+  become: true
+  become_user: "{{ ansible_user_id }}"
+  git:
+    accept_hostkey: "{{ dotfiles_repo.accept_hostkey | default(false) }}"
+    dest: "{{ ansible_env.HOME }}/.dotfiles"
+    track_submodules: true
+    repo: "{{ dotfiles_repo.url }}"
+    version: "{{ dotfiles_repo.version }}"
+    update: True
+    clone: True
+    force: True
+
+- name: rcm | Ensure rcm config exists
+  become: true
+  become_user: "{{ ansible_user_id }}"
+  ansible.builtin.command: cp -rf "{{ ansible_env.HOME }}/.dotfiles/rcrc" "{{ ansible_env.HOME }}/.rcrc"
+  changed_when: false
+  ignore_errors: true
+
+- name: rcm | Ensure that the dotfiles are linked
+  become: true
+  become_user: "{{ ansible_user_id }}"
+  shell:
+    cmd: "rcup -f -v"
+  changed_when: false
+
+- name: rcm | Ensure ssh config has correct permissions
+  become: true
+  become_user: "{{ ansible_user_id }}"
+  file:
+    path: "{{ ansible_env.HOME }}/.ssh/config"
+    force: true
+    state: link
+    mode: "0400"
+  ignore_errors: true

@@ -1,0 +1,186 @@
+---
+- name: GNOME | Ensure dconf requirements is installed
+  become: true
+  ansible.builtin.package:
+    name:
+      - python3-psutil
+      - dconf
+      - dbus-tools
+      - dbus-daemon
+      - gnome-tweak-tool
+      - gnome-shell-extension-workspace-indicator
+    state: present
+
+- name: GNOME | Disable desktop effects in GNOME
+  dconf:
+    key: "/org/gnome/desktop/interface/enable-animations"
+    value: "false"
+    state: present
+
+- name: GNOME | Configure available keyboard layouts in GNOME
+  dconf:
+    key: "/org/gnome/desktop/input-sources/sources"
+    value: "[('xkb', 'us'), ('ibus', 'm17n:vi:telex')]"
+    state: present
+
+- name: GNOME | file browser shortcut
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/home"
+    value: "['<Super>e']"
+
+- name: GNOME | web browser shortcut
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/www"
+    value: "['<Super>w']"
+
+###############################################################################
+# power #
+###############################################################################
+
+- name: GNOME | never blank screen
+  dconf:
+    key: "/org/gnome/desktop/session/idle-delay"
+    value: "uint32 0"
+
+- name: GNOME | inactive timeout
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type"
+    value: "'nothing'"
+
+- name: GNOME | inactive timeout on battery
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type"
+    value: "'nothing'"
+
+- name: GNOME | show battery percentage
+  dconf:
+    key: "/org/gnome/desktop/interface/show-battery-percentage"
+    value: "true"
+
+# - name: ignore lid close
+#   become: true
+#   lineinfile:
+#     path: /etc/systemd/logind.conf
+#     regexp: "^HandleLidSwitch="
+#     insertafter: "^#HandleLidSwitch="
+#     line: "HandleLidSwitch=ignore"
+
+###############################################################################
+# Custom shortcuts are more complicated. For each shortcut, you have to
+# define a name, a command, and a binding.
+###############################################################################
+
+- name: GNOME | tilix | shortcut name
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name"
+    value: "'tilix'"
+- name: GNOME | tilix | shortcut command
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command"
+    value: "'/usr/bin/tilix'"
+- name: GNOME | tilix | shortcut binding
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding"
+    value: "'<Super>r'"
+
+- name: GNOME | tilix | quake shortcut name
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name"
+    value: "'tilix-quake'"
+- name: GNOME | tilix | quake shortcut command
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command"
+    value: "'/usr/bin/tilix --quake'"
+- name: GNOME | tilix | quake shortcut binding
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding"
+    value: "'<Super>q'"
+
+# All of your custom shortcuts must also be added to an array.
+- name: GNOME | enable custom keybindings
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+    value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
+
+###############################################################################
+# date and time
+###############################################################################
+
+- name: GNOME | automatic timezone
+  dconf:
+    key: "/org/gnome/desktop/datetime/automatic-timezone"
+    value: "true"
+- name: GNOME | clock show date
+  dconf:
+    key: "/org/gnome/desktop/interface/clock-show-date"
+    value: "true"
+- name: GNOME | clock format
+  dconf:
+    key: "/org/gnome/desktop/interface/clock-format"
+    value: "'24h'"
+
+###############################################################################
+# behavior #
+###############################################################################
+
+- name: GNOME | workspaces span displays
+  dconf:
+    key: "/org/gnome/mutter/workspaces-only-on-primary"
+    value: "false"
+
+- name: GNOME | app-switcher on the current workspace only
+  dconf:
+    key: "/org/gnome/shell/app-switcher/current-workspace-only"
+    value: "true"
+
+# - name: set xkb options
+#   dconf:
+#     key: "/org/gnome/desktop/input-sources/xkb-options"
+#     value: "['caps:escape', 'lv3:rwin_switch', 'shift:both_capslock_cancel']"
+
+- name: GNOME | detach modal dialogs
+  dconf:
+    key: "/org/gnome/shell/overrides/attach-modal-dialogs"
+    value: "false"
+
+- name: GNOME | automount
+  dconf:
+    key: "/org/gnome/desktop/media-handling/automount"
+    value: "false"
+
+- name: GNOME | area click method
+  dconf:
+    key: "/org/gnome/desktop/peripherals/touchpad/click-method"
+    value: "'areas'"
+
+- name: GNOME | disable natural scrolling
+  dconf:
+    key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll"
+    value: "false"
+
+- name: GNOME | enable two-finger scrolling
+  dconf:
+    key: "/org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled"
+    value: "true"
+
+- name: GNOME | mutter real-time scheduling
+  dconf:
+    key: "/org/gnome/mutter/experimental-features"
+    value: "['rt-scheduler']"
+
+- name: GNOME | disable hot corner
+  dconf:
+    key: "/org/gnome/desktop/interface/enable-hot-corners"
+    value: "false"
+
+- name: GNOME | numlock on
+  dconf:
+    key: "/org/gnome/desktop/peripherals/keyboard/numlock-state"
+    value: "true"
+
+# Only works on X11, not Wayland.
+- name: GNOME | middle click titlebar to lower
+  dconf:
+    key: "/org/gnome/desktop/wm/preferences/action-middle-click-titlebar"
+    value: "'lower'"
+

@@ -1,0 +1,21 @@
+---
+tilix_options:
+  - { key: "/com/gexperts/Tilix/tab-position", value: "'top'" }
+  - { key: "/com/gexperts/Tilix/terminal-title-style", value: "'small'" }
+  - { key: "/com/gexperts/Tilix/theme-variant", value: "'dark'" }
+  - { key: "/com/gexperts/Tilix/window-style", value: "'borderless'" }
+
+tilix_default_profile_properties:
+  - { key: "background-transparency-percent", value: "0" }
+  - { key: "use-custom-command", value: "true" }
+  - { key: "custom-command", value: "'/usr/bin/zsh'" }
+  - {
+      key: "palette",
+      value: "['#272822', '#F92672', '#A6E22E', '#F4BF75', '#66D9EF', '#AE81FF', '#A1EFE4', '#F8F8F2', '#75715E', '#F92672', '#A6E22E', '#F4BF75', '#66D9EF', '#AE81FF', '#A1EFE4', '#F9F8F5']",
+    }
+  - { key: "background-color", value: "'#272822'" }
+  - { key: "foreground-color", value: "'#F8F8F2'" }
+  - { key: "show-scrollbar", value: "false" }
+  - { key: "terminal-bell", value: "'icon'" }
+  - { key: "terminal-title", value: "''" }
+  - { key: "use-theme-colors", value: "false" }

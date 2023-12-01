@@ -1,0 +1,37 @@
+- name: Play for creating a linux devbox
+  hosts:
+    - devbox-gui
+  connection: local
+  become: false
+  vars_files:
+    - default.config.yaml
+  roles:
+    - role: bootstrap-os
+    - role: homebrew
+    - role: dotfiles
+    - role: unarchive-packages
+    - role: gantsign.sdkman
+  tasks:
+    - include_role: { name: "robertdebock.gnome" }
+      when: is_gnome
+      args:
+        apply:
+          become: true
+    - include_role: { name: "flatpaks" }
+      when: is_gnome
+    - include_role: { name: "tilix" }
+      when: is_gnome
+    - include_role: { name: "hp-printer" }
+      when: is_gnome
+    - include_role: { name: "gnome-settings" }
+      when: is_gnome
+    - include_role: { name: "robertdebock.tigervnc" }
+      when: is_gnome
+      args:
+        apply:
+          become: true
+    - include_role: { name: "geerlingguy.docker" }
+      when: is_docker
+      args:
+        apply:
+          become: true

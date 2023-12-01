@@ -1,0 +1,33 @@
+---
+_packages:
+  default: []
+  Debian:
+  SUSE:
+  RedHat:
+    - ansible
+    - bash-completion
+    - binutils
+    - buildah
+    - cmake
+    - cracklib-dicts
+    - distribution-gpg-keys
+    - gcc
+    - generic-release-notes
+    - git
+    - lshw
+    - make
+    - openssl
+    - passwd
+    - shadow-utils
+    - sudo
+    - telnet
+    - unrar
+    - util-linux-user
+    - zsh
+    # - skopeo
+    - xsel # vscode json to yaml
+    - nss-tools # mkcert
+    - which
+    - openssl-devel
+
+packages: "{{ _packages[ansible_distribution_file_variety] | default(_packages[ansible_os_family] | default(_packages['default'])) }}"

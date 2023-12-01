@@ -1,0 +1,21 @@
+---
+- name: Fedora | Install dnf-plugins-core in order to use dnf config-manager
+  become: true
+  dnf:
+    name:
+      - curl
+      - dnf-plugins-core
+    state: present
+
+- name: Fedora | Install fedora-workstation-repositories
+  become: true
+  dnf:
+    name: fedora-workstation-repositories
+    state: present
+
+- name: Fedora | setup-common | Ensure packages was installed
+  become: true
+  dnf:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ packages | default([]) }}"
