@@ -6,5 +6,5 @@ all:
       is_gnome: false
     devbox-gui:
       ansible_connection: local
-      is_docker: false
-      is_gnome: false
+      is_docker: true
+      is_gnome: true

@@ -5,6 +5,7 @@
   become: false
   vars_files:
     - default.config.yaml
+    # - common.config.yaml
   roles:
     - role: bootstrap-os
     - role: homebrew
