@@ -33,42 +33,10 @@
     key: "/org/gnome/settings-daemon/plugins/media-keys/www"
     value: "['<Super>w']"
 
-###############################################################################
-# power #
-###############################################################################
-
-- name: GNOME | never blank screen
-  dconf:
-    key: "/org/gnome/desktop/session/idle-delay"
-    value: "uint32 0"
-
-- name: GNOME | inactive timeout
-  dconf:
-    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type"
-    value: "'nothing'"
-
-- name: GNOME | inactive timeout on battery
-  dconf:
-    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type"
-    value: "'nothing'"
-
-- name: GNOME | show battery percentage
-  dconf:
-    key: "/org/gnome/desktop/interface/show-battery-percentage"
-    value: "true"
-
-# - name: ignore lid close
-#   become: true
-#   lineinfile:
-#     path: /etc/systemd/logind.conf
-#     regexp: "^HandleLidSwitch="
-#     insertafter: "^#HandleLidSwitch="
-#     line: "HandleLidSwitch=ignore"
-
-###############################################################################
-# Custom shortcuts are more complicated. For each shortcut, you have to
-# define a name, a command, and a binding.
-###############################################################################
+# ###############################################################################
+# # Custom shortcuts are more complicated. For each shortcut, you have to
+# # define a name, a command, and a binding.
+# ###############################################################################
 
 - name: GNOME | tilix | shortcut name
   dconf:
@@ -119,9 +87,9 @@
     key: "/org/gnome/desktop/interface/clock-format"
     value: "'24h'"
 
-###############################################################################
-# behavior #
-###############################################################################
+# ###############################################################################
+# # behavior #
+# ###############################################################################
 
 - name: GNOME | workspaces span displays
   dconf:
@@ -133,54 +101,17 @@
     key: "/org/gnome/shell/app-switcher/current-workspace-only"
     value: "true"
 
-# - name: set xkb options
-#   dconf:
-#     key: "/org/gnome/desktop/input-sources/xkb-options"
-#     value: "['caps:escape', 'lv3:rwin_switch', 'shift:both_capslock_cancel']"
-
-- name: GNOME | detach modal dialogs
-  dconf:
-    key: "/org/gnome/shell/overrides/attach-modal-dialogs"
-    value: "false"
+# # - name: set xkb options
+# #   dconf:
+# #     key: "/org/gnome/desktop/input-sources/xkb-options"
+# #     value: "['caps:escape', 'lv3:rwin_switch', 'shift:both_capslock_cancel']"
 
 - name: GNOME | automount
   dconf:
     key: "/org/gnome/desktop/media-handling/automount"
     value: "false"
 
-- name: GNOME | area click method
-  dconf:
-    key: "/org/gnome/desktop/peripherals/touchpad/click-method"
-    value: "'areas'"
-
-- name: GNOME | disable natural scrolling
-  dconf:
-    key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll"
-    value: "false"
-
-- name: GNOME | enable two-finger scrolling
-  dconf:
-    key: "/org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled"
-    value: "true"
-
-- name: GNOME | mutter real-time scheduling
-  dconf:
-    key: "/org/gnome/mutter/experimental-features"
-    value: "['rt-scheduler']"
-
 - name: GNOME | disable hot corner
   dconf:
     key: "/org/gnome/desktop/interface/enable-hot-corners"
     value: "false"
-
-- name: GNOME | numlock on
-  dconf:
-    key: "/org/gnome/desktop/peripherals/keyboard/numlock-state"
-    value: "true"
-
-# Only works on X11, not Wayland.
-- name: GNOME | middle click titlebar to lower
-  dconf:
-    key: "/org/gnome/desktop/wm/preferences/action-middle-click-titlebar"
-    value: "'lower'"
-
