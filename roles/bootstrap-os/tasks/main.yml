@@ -1,4 +1,10 @@
 ---
+- name: Update all system packages
+  ansible.builtin.package:
+    name: "*"
+    state: latest
+  become: true
+
 - name: Fetch /etc/os-release
   raw: cat /etc/os-release
   register: os_release
