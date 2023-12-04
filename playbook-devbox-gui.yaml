@@ -26,11 +26,6 @@
       when: is_gnome
     - include_role: { name: "gnome-settings" }
       when: is_gnome
-    - include_role: { name: "robertdebock.tigervnc" }
-      when: is_gnome
-      args:
-        apply:
-          become: true
     - include_role: { name: "geerlingguy.docker" }
       when: is_docker
       args:
