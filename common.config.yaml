@@ -12,6 +12,7 @@ homebrew_taps:
   - homebrew/core
   - aws/tap
 homebrew_installed_packages:
+  - asdf
   - aws-sam-cli
   - aws-vault
   - awscli
