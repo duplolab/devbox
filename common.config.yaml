@@ -9,7 +9,6 @@ sdkman_users:
 
 ##### role homebrew
 homebrew_taps:
-  - homebrew/core
   - aws/tap
 homebrew_installed_packages:
   - asdf
