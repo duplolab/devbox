@@ -12,7 +12,9 @@ homebrew_taps:
   - aws/tap
 homebrew_installed_packages:
   - asdf
+  - git-secrets
   - jq
+  - pre-commit
   - yq
 
 ##### dotfiles

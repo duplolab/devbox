@@ -25,6 +25,7 @@ homebrew_installed_packages:
   - git-flow
   - git-lfs
   - git-now
+  - git-secrets
   - gitleaks
   - go
   - gopls
@@ -42,6 +43,7 @@ homebrew_installed_packages:
   - mkcert
   - mongosh
   - nvm
+  - pre-commit
   - protobuf
   - pyenv
   - rcm
