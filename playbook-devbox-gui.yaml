@@ -11,13 +11,13 @@
     - role: homebrew
     - role: dotfiles
     - role: unarchive-packages
-    - role: gantsign.sdkman
+    # - role: gantsign.sdkman
   tasks:
-    - include_role: { name: "robertdebock.gnome" }
-      when: is_gnome
-      args:
-        apply:
-          become: true
+    # - include_role: { name: "robertdebock.gnome" }
+    #   when: is_gnome
+    #   args:
+    #     apply:
+    #       become: true
     - include_role: { name: "flatpaks" }
       when: is_gnome
     - include_role: { name: "tilix" }
