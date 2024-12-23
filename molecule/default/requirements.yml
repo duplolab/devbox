@@ -4,7 +4,7 @@ collections:
     version: 8.0.2
 roles:
   - name: geerlingguy.docker
-    version: 7.0.2
+    version: 7.4.3
   - name: gantsign.sdkman
     version: 2.2.0
   - name: robertdebock.gnome
