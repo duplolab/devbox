@@ -10,7 +10,7 @@ platforms:
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     dockerfile: fedora39.Dockerfile
     image: geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest
-    name: devbox-gui
+    name: instance
     pre_build_image: true
     privileged: true
     volumes:
