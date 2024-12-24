@@ -11,7 +11,6 @@
     - role: homebrew
     - role: dotfiles
     - role: unarchive-packages
-    # - role: gantsign.sdkman
   tasks:
     - include_role: { name: "robertdebock.gnome" }
       when: is_gnome

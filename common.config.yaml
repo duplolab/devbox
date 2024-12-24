@@ -3,10 +3,6 @@
 docker_users:
   - "{{ ansible_user_id }}"
 
-##### role gantsign.sdkman
-sdkman_users:
-  - "{{ ansible_user_id }}"
-
 ##### role homebrew
 homebrew_taps:
   - aws/tap
