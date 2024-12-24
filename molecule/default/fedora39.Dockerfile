@@ -39,6 +39,7 @@ RUN echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
 VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
 CMD ["/usr/sbin/init"]
 
+# Create `ansible` user with sudo permissions and membership in `DEPLOY_GROUP`
 ENV ANSIBLE_USER=ansible SUDO_GROUP=wheel DEPLOY_GROUP=deployer
 RUN set -xe \
   && groupadd -r ${ANSIBLE_USER} \

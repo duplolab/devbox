@@ -8,10 +8,10 @@ driver:
 platforms:
   - cgroupns_mode: host
     command: ${MOLECULE_DOCKER_COMMAND:-""}
-    dockerfile: fedora39.Dockerfile
-    image: geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest
+    dockerfile: ${MOLECULE_DISTRO}.Dockerfile
+    image: geerlingguy/docker-${MOLECULE_DISTRO:-fedora39}-ansible:latest
     name: instance
-    pre_build_image: true
+    pre_build_image: false
     privileged: true
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
