@@ -1,10 +1,6 @@
 all:
   hosts:
-    devbox-cli:
-      ansible_connection: local
-      is_docker: false
-      is_gnome: false
-    devbox-gui:
+    instance:
       ansible_connection: local
       is_docker: true
       is_gnome: true

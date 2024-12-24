@@ -1,6 +1,6 @@
 - name: Play for creating a linux devbox
   hosts:
-    - devbox-cli
+    - instance
   connection: local
   become: false
   vars_files:
