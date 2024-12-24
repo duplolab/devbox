@@ -2,6 +2,30 @@
 _packages:
   default: []
   Debian:
+    - ansible
+    - bash-completion
+    - binutils
+    - build-essential
+    - cmake
+    - cracklib-runtime
+    - debian-keyring
+    - gcc
+    - git
+    - lshw
+    - make
+    - openssl
+    - passwd
+    - shadow-utils
+    - sudo
+    - telnet
+    - unrar
+    - util-linux
+    - zsh
+    - skopeo
+    - xsel # vscode json to yaml
+    - libnss3-tools # mkcert
+    - which
+    - libssl-dev
   SUSE:
   RedHat:
     - ansible

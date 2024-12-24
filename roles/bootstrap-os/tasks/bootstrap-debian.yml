@@ -1,1 +1,12 @@
 ---
+- name: Debian | setup-common | Update apt cache
+  apt:
+    update_cache: yes
+  become: true
+
+- name: Debian | setup-common | Ensure packages was installed
+  become: true
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ packages | default([]) }}"

@@ -50,7 +50,7 @@ VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
 CMD ["/lib/systemd/systemd"]
 
 # Create `ansible` user with sudo permissions and membership in `DEPLOY_GROUP`
-ENV ANSIBLE_USER=ansible SUDO_GROUP=wheel DEPLOY_GROUP=deployer
+ENV ANSIBLE_USER=ansible SUDO_GROUP=sudo DEPLOY_GROUP=deployer
 RUN set -xe \
   && groupadd -r ${ANSIBLE_USER} \
   && groupadd -r ${DEPLOY_GROUP} \
