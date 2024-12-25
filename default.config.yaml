@@ -6,16 +6,13 @@ docker_users:
 ##### role homebrew
 homebrew_taps:
   - aws/tap
+  - sdkman/tap
 homebrew_installed_packages:
-  - asdf
-  - git-secrets
   - jq
-  - pre-commit
-  - yq
 
 ##### dotfiles
 dotfiles_repo:
-  url: https://github.com/duplolab/dotfiles.git
+  url: https://github.com/thoughtbot/dotfiles.git
   version: main
   accept_hostkey: false
 

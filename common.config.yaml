@@ -55,7 +55,7 @@ homebrew_installed_packages:
 
 ##### dotfiles
 dotfiles_repo:
-  url: https://github.com/duplolab/dotfiles.git
+  url: https://github.com/thoughtbot/dotfiles.git
   version: main
   accept_hostkey: false
 
