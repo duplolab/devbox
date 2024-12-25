@@ -5,7 +5,6 @@ _packages:
     - binutils          # Binary utilities
     - openssl           # Secure communication
     - passwd            # User management
-    - shadow            # Shadow password management (Debian equivalent of shadow-utils)
     - sudo              # Privilege escalation
     - util-linux        # Core utilities (Debian equivalent of util-linux-user)
     - which             # Locate executables
@@ -16,7 +15,6 @@ _packages:
     - binutils          # Binary utilities
     - openssl           # Secure communication
     - passwd            # User management
-    - shadow            # Shadow password management (correct for SUSE)
     - sudo              # Privilege escalation
     - util-linux        # Core utilities (correct for SUSE)
     - which             # Locate executables
@@ -27,7 +25,6 @@ _packages:
     - binutils          # Binary utilities
     - openssl           # Secure communication
     - passwd            # User management
-    - shadow-utils      # Shadow password management
     - sudo              # Privilege escalation
     - util-linux-user   # Core utilities
     - which             # Locate executables
