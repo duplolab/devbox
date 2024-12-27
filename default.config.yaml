@@ -30,9 +30,7 @@ unarchive_packages:
       - oc
 
 ##### role: flatpaks
-flatpak_packages:
-  - com.google.Chrome
-
+flatpak_packages: []
 ##### tigervnc
 tigervnc_username: "{{ ansible_user_id }}"
 tigervnc_groupname: "{{ ansible_user_id }}"

@@ -11,7 +11,11 @@
     - role: dotfiles
     - role: unarchive-packages
   tasks:
+    - include_role: { name: "flatpaks" }
+      when: is_gnome
     - include_role: { name: "tilix" }
+      when: is_gnome
+    - include_role: { name: "gnome-settings" }
       when: is_gnome
     - include_role: { name: "geerlingguy.docker" }
       when: is_docker
