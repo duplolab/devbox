@@ -151,6 +151,10 @@
     - name: Force update brew after installation.
       ansible.builtin.command: "{{ homebrew_brew_bin_path }}/brew update --force"
       when: not homebrew_binary.stat.exists
+      register: brew_update_result
+      retries: 5
+      delay: 10
+      until: brew_update_result.rc == 0
 
     - name: Where is the cache?
       ansible.builtin.command: "{{ homebrew_brew_bin_path }}/brew --cache"
