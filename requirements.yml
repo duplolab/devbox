@@ -3,6 +3,8 @@ collections:
   - name: community.general
     version: 8.0.2
 roles:
+  - name: buluma.bootstrap
+    version: v24.7.19
   - name: geerlingguy.docker
     version: 7.4.3
   - name: robertdebock.gnome
